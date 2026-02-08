@@ -1,15 +1,220 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GSAP Button Flair</title>
+<!-- GSAP CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<style>
+:root {
+  --color-surface-white: #ffffff;
+  --color-just-black: #000000;
+  --ease-in-out-quart: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* this pen has some external brand styles in the css panel */
+body {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+button {
+  color: currentColor;
+}
+
+.button {
+  align-items: center;
+  background: 0 0;
+  border: none;
+  border-radius: 6.25rem;
+  color: var(--color-surface-white);
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 1.2rem;
+  font-weight: 600;
+  gap: 0.363636em;
+  justify-content: center;
+  letter-spacing: -0.01em;
+  line-height: 1.04545;
+  overflow: hidden;
+  padding: 0.9375rem 1.5rem;
+  position: relative;
+  text-decoration: none;
+  word-break: break-word;
+  text-decoration: none;
+}
+
+@media (hover: hover) {
+  .button.button--stroke:hover {
+    color: var(--color-just-black);
+    text-decoration: none;
+  }
+}
+
+.button--stroke:after {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.button--stroke:after {
+  border: 0.125rem solid var(--color-surface-white);
+  border-radius: 6.25rem;
+  content: "";
+  pointer-events: none;
+}
+
+.button__label {
+  position: relative;
+  text-align: center;
+  transition: color 50ms var(--ease-in-out-quart);
+}
+
+.button--stroke:hover .button__label {
+  transition: color 0.15s var(--ease-in-out-quart);
+}
+body{
+  background: #000000;
+}
+
+.button__flair {
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.button--stroke .button__flair {
+  transform: scale(0);
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+.button__flair:before {
+  aspect-ratio: 1/1;
+  background-color: var(--color-surface-white);
+  border-radius: 50%;
+  content: "";
+  display: block;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  transform: translate(-50%, -50%);
+  width: 170%;
+}
+
+</style>
+
 </head>
 <body>
-    <script src="./problem-01.js"></script>
-    <script src="./problem-02.js"></script>
-    <script src="./problem-03.js"></script>
-    <script src="./problem-04.js"></script>
-    <script src="./problem-05.js"></script>
+
+<a href="#" class="button button--stroke" data-block="button">
+  <span class="button__flair"></span>
+  <span class="button__label">Get GSAP</span>
+</a>
+
+<script>
+class Button {
+  constructor(buttonElement) {
+    this.block = buttonElement;
+    this.init();
+    this.initEvents();
+  }
+
+  init() {
+    const el = gsap.utils.selector(this.block);
+
+    this.DOM = {
+      button: this.block,
+      flair: el(".button__flair")
+    };
+
+    this.xSet = gsap.quickSetter(this.DOM.flair, "xPercent");
+    this.ySet = gsap.quickSetter(this.DOM.flair, "yPercent");
+  }
+
+  getXY(e) {
+    const {
+      left,
+      top,
+      width,
+      height
+    } = this.DOM.button.getBoundingClientRect();
+
+    const xTransformer = gsap.utils.pipe(
+      gsap.utils.mapRange(0, width, 0, 100),
+      gsap.utils.clamp(0, 100)
+    );
+
+    const yTransformer = gsap.utils.pipe(
+      gsap.utils.mapRange(0, height, 0, 100),
+      gsap.utils.clamp(0, 100)
+    );
+
+    return {
+      x: xTransformer(e.clientX - left),
+      y: yTransformer(e.clientY - top)
+    };
+  }
+
+  initEvents() {
+    this.DOM.button.addEventListener("mouseenter", (e) => {
+      const { x, y } = this.getXY(e);
+
+      this.xSet(x);
+      this.ySet(y);
+
+      gsap.to(this.DOM.flair, {
+        scale: 1,
+        duration: 0.4,
+        ease: "power2.out"
+      });
+    });
+
+    this.DOM.button.addEventListener("mouseleave", (e) => {
+      const { x, y } = this.getXY(e);
+
+      gsap.killTweensOf(this.DOM.flair);
+
+      gsap.to(this.DOM.flair, {
+        xPercent: x > 90 ? x + 20 : x < 10 ? x - 20 : x,
+        yPercent: y > 90 ? y + 20 : y < 10 ? y - 20 : y,
+        scale: 0,
+        duration: 0.3,
+        ease: "power2.out"
+      });
+    });
+
+    this.DOM.button.addEventListener("mousemove", (e) => {
+      const { x, y } = this.getXY(e);
+
+      gsap.to(this.DOM.flair, {
+        xPercent: x,
+        yPercent: y,
+        duration: 0.4,
+        ease: "power2"
+      });
+    });
+  }
+}
+
+const buttonElements = document.querySelectorAll('[data-block="button"]');
+
+buttonElements.forEach((buttonElement) => {
+  new Button(buttonElement);
+});
+
+</script>
+
 </body>
 </html>
