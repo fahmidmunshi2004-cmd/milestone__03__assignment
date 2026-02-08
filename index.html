@@ -1,225 +1,296 @@
 <!DOCTYPE html>
 
 <html lang="bn">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GSAP Button Flair</title>
-<!-- GSAP CDN -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<style>
-:root {
-  --color-surface-white: #ffffff;
-  --color-just-black: #000000;
-  --ease-in-out-quart: cubic-bezier(0.77, 0, 0.175, 1);
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSAP Button Flair</title>
 
-/* this pen has some external brand styles in the css panel */
-body {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  flex-direction: column;
-  min-height: 100vh;
-}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+NZ+Basic:wght@100..400&display=swap"
+        rel="stylesheet">
 
-button {
-  color: currentColor;
-}
 
-.button {
-  align-items: center;
-  background: 0 0;
-  border: none;
-  border-radius: 6.25rem;
-  color: var(--color-surface-white);
-  cursor: pointer;
-  display: inline-flex;
-  font-size: 1.2rem;
-  font-weight: 600;
-  gap: 0.363636em;
-  justify-content: center;
-  letter-spacing: -0.01em;
-  line-height: 1.04545;
-  overflow: hidden;
-  padding: 0.9375rem 1.5rem;
-  position: relative;
-  text-decoration: none;
-  word-break: break-word;
-  text-decoration: none;
-}
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        :root {
+            --color-surface-white: #ffffff;
+            --color-just-black: #000000;
+            --ease-in-out-quart: cubic-bezier(0.77, 0, 0.175, 1);
+        }
 
-@media (hover: hover) {
-  .button.button--stroke:hover {
-    color: var(--color-just-black);
-    text-decoration: none;
-  }
-}
+        /* this pen has some external brand styles in the css panel */
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-direction: column;
+            min-height: 100vh;
+        }
 
-.button--stroke:after {
-  bottom: 0;
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-}
+        button {
+            color: currentColor;
+        }
 
-.button--stroke:after {
-  border: 0.125rem solid var(--color-surface-white);
-  border-radius: 6.25rem;
-  content: "";
-  pointer-events: none;
-}
+        .button {
+            align-items: center;
+            background: 0 0;
+            border: none;
+            border-radius: 6.25rem;
+            color: var(--color-surface-white);
+            cursor: pointer;
+            display: inline-flex;
+            font-size: 1.2rem;
+            font-weight: 600;
+            gap: 0.363636em;
+            justify-content: center;
+            letter-spacing: -0.01em;
+            line-height: 1.04545;
+            overflow: hidden;
+            padding: 0.9375rem 1.5rem;
+            position: relative;
+            text-decoration: none;
+            word-break: break-word;
+            text-decoration: none;
+        }
 
-.button__label {
-  position: relative;
-  text-align: center;
-  transition: color 50ms var(--ease-in-out-quart);
-}
+        @media (hover: hover) {
+            .button.button--stroke:hover {
+                color: var(--color-just-black);
+                text-decoration: none;
+            }
+        }
 
-.button--stroke:hover .button__label {
-  transition: color 0.15s var(--ease-in-out-quart);
-}
-body{
-  background: #000000;
-}
+        .button--stroke:after {
+            bottom: 0;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
 
-.button__flair {
-  bottom: 0;
-  left: 0;
-  pointer-events: none;
-  position: absolute;
-  right: 0;
-  top: 0;
-}
+        .button--stroke:after {
+            border: 0.125rem solid var(--color-surface-white);
+            border-radius: 6.25rem;
+            content: "";
+            pointer-events: none;
+        }
 
-.button--stroke .button__flair {
-  transform: scale(0);
-  transform-origin: 0 0;
-  will-change: transform;
-}
+        .button__label {
+            position: relative;
+            text-align: center;
+            transition: color 50ms var(--ease-in-out-quart);
+            font-size: 30px;
+            font-family: "Playwrite NZ Basic", cursive;
+            font-optical-sizing: auto;
+        }
 
-.button__flair:before {
-  aspect-ratio: 1/1;
-  background-color: var(--color-surface-white);
-  border-radius: 50%;
-  content: "";
-  display: block;
-  left: 0;
-  pointer-events: none;
-  position: absolute;
-  top: 0;
-  transform: translate(-50%, -50%);
-  width: 170%;
-}
+        .button--stroke:hover .button__label {
+            transition: color 0.15s var(--ease-in-out-quart);
+        }
 
-</style>
+        body {
+            background: #000000;
+        }
+
+        .button__flair {
+            bottom: 0;
+            left: 0;
+            pointer-events: none;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .button--stroke .button__flair {
+            transform: scale(0);
+            transform-origin: 0 0;
+            will-change: transform;
+        }
+
+        .button__flair:before {
+            aspect-ratio: 1/1;
+            background-color: var(--color-surface-white);
+            border-radius: 50%;
+            content: "";
+            display: block;
+            left: 0;
+            pointer-events: none;
+            position: absolute;
+            top: 0;
+            transform: translate(-50%, -50%);
+            width: 170%;
+        }
+    </style>
 
 </head>
+
 <body>
 
-<a href="#" class="button button--stroke" data-block="button">
-  <span class="button__flair"></span>
-  <span class="button__label">Get GSAP</span>
-</a>
+    <a href="https://phi-lab.vercel.app/" target="_blank" class="button button--stroke" data-block="button">
+        <span class="button__flair"></span>
+        <span class="button__label">Assignment View</span>
+    </a>
     <script src="./problem-01.js"></script>
     <script src="./problem-02.js"></script>
     <script src="./problem-03.js"></script>
     <script src="./problem-04.js"></script>
     <script src="./problem-05.js"></script>
-    
-<script>
-class Button {
-  constructor(buttonElement) {
-    this.block = buttonElement;
-    this.init();
-    this.initEvents();
-  }
 
-  init() {
-    const el = gsap.utils.selector(this.block);
+    <script>
+        class Button {
+            constructor(buttonElement) {
+                this.block = buttonElement;
+                this.init();
+                this.initEvents();
+            }
 
-    this.DOM = {
-      button: this.block,
-      flair: el(".button__flair")
-    };
+            init() {
+                const el = gsap.utils.selector(this.block);
 
-    this.xSet = gsap.quickSetter(this.DOM.flair, "xPercent");
-    this.ySet = gsap.quickSetter(this.DOM.flair, "yPercent");
-  }
+                this.DOM = {
+                    button: this.block,
+                    flair: el(".button__flair")
+                };
 
-  getXY(e) {
-    const {
-      left,
-      top,
-      width,
-      height
-    } = this.DOM.button.getBoundingClientRect();
+                this.xSet = gsap.quickSetter(this.DOM.flair, "xPercent");
+                this.ySet = gsap.quickSetter(this.DOM.flair, "yPercent");
+            }
 
-    const xTransformer = gsap.utils.pipe(
-      gsap.utils.mapRange(0, width, 0, 100),
-      gsap.utils.clamp(0, 100)
-    );
+            getXY(e) {
+                const {
+                    left,
+                    top,
+                    width,
+                    height
+                } = this.DOM.button.getBoundingClientRect();
 
-    const yTransformer = gsap.utils.pipe(
-      gsap.utils.mapRange(0, height, 0, 100),
-      gsap.utils.clamp(0, 100)
-    );
+                const xTransformer = gsap.utils.pipe(
+                    gsap.utils.mapRange(0, width, 0, 100),
+                    gsap.utils.clamp(0, 100)
+                );
 
-    return {
-      x: xTransformer(e.clientX - left),
-      y: yTransformer(e.clientY - top)
-    };
-  }
+                const yTransformer = gsap.utils.pipe(
+                    gsap.utils.mapRange(0, height, 0, 100),
+                    gsap.utils.clamp(0, 100)
+                );
 
-  initEvents() {
-    this.DOM.button.addEventListener("mouseenter", (e) => {
-      const { x, y } = this.getXY(e);
+                return {
+                    x: xTransformer(e.clientX - left),
+                    y: yTransformer(e.clientY - top)
+                };
+            }
 
-      this.xSet(x);
-      this.ySet(y);
+            initEvents() {
+                this.DOM.button.addEventListener("mouseenter", (e) => {
+                    const { x, y } = this.getXY(e);
 
-      gsap.to(this.DOM.flair, {
-        scale: 1,
-        duration: 0.4,
-        ease: "power2.out"
-      });
-    });
+                    this.xSet(x);
+                    this.ySet(y);
 
-    this.DOM.button.addEventListener("mouseleave", (e) => {
-      const { x, y } = this.getXY(e);
+                    gsap.to(this.DOM.flair, {
+                        scale: 1,
+                        duration: 0.4,
+                        ease: "power2.out"
+                    });
+                });
 
-      gsap.killTweensOf(this.DOM.flair);
+                this.DOM.button.addEventListener("mouseleave", (e) => {
+                    const { x, y } = this.getXY(e);
 
-      gsap.to(this.DOM.flair, {
-        xPercent: x > 90 ? x + 20 : x < 10 ? x - 20 : x,
-        yPercent: y > 90 ? y + 20 : y < 10 ? y - 20 : y,
-        scale: 0,
-        duration: 0.3,
-        ease: "power2.out"
-      });
-    });
+                    gsap.killTweensOf(this.DOM.flair);
 
-    this.DOM.button.addEventListener("mousemove", (e) => {
-      const { x, y } = this.getXY(e);
+                    gsap.to(this.DOM.flair, {
+                        xPercent: x > 90 ? x + 20 : x < 10 ? x - 20 : x,
+                        yPercent: y > 90 ? y + 20 : y < 10 ? y - 20 : y,
+                        scale: 0,
+                        duration: 0.3,
+                        ease: "power2.out"
+                    });
+                });
 
-      gsap.to(this.DOM.flair, {
-        xPercent: x,
-        yPercent: y,
-        duration: 0.4,
-        ease: "power2"
-      });
-    });
-  }
-}
+                this.DOM.button.addEventListener("mousemove", (e) => {
+                    const { x, y } = this.getXY(e);
 
-const buttonElements = document.querySelectorAll('[data-block="button"]');
+                    gsap.to(this.DOM.flair, {
+                        xPercent: x,
+                        yPercent: y,
+                        duration: 0.4,
+                        ease: "power2"
+                    });
+                });
+            }
+        }
 
-buttonElements.forEach((buttonElement) => {
-  new Button(buttonElement);
-});
+        const buttonElements = document.querySelectorAll('[data-block="button"]');
 
-</script>
+        buttonElements.forEach((buttonElement) => {
+            new Button(buttonElement);
+        });
+
+    </script>
+    <script>
+
+        /* ===============================
+           RIGHT CLICK DISABLE
+        ================================ */
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+
+
+        /* ===============================
+           KEYBOARD SHORTCUT BLOCK
+        ================================ */
+        document.addEventListener('keydown', function (e) {
+            if (
+                e.key === "F12" ||
+                (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "i") ||
+                (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "j") ||
+                (e.ctrlKey && e.key.toLowerCase() === "u")
+            ) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+
+        /* ===============================
+           DEVTOOLS DETECT + 30s RELOAD
+        ================================ */
+        let devtoolsOpened = false;
+
+        setInterval(() => {
+            const start = performance.now();
+            debugger;
+            const end = performance.now();
+
+            if (end - start > 100) {
+                if (!devtoolsOpened) {
+                    devtoolsOpened = true;
+
+                    console.clear();
+                    console.log("⚠ DevTools detected. Page will reload in 30 seconds.");
+
+                    setTimeout(() => {
+                        location.reload();
+                    }, 30000);
+                }
+            }
+        }, 1000);
+
+
+        /* ===============================
+           DISABLE TEXT SELECTION
+        ================================ */
+        document.addEventListener('selectstart', function (e) {
+            e.preventDefault();
+        });
+    </script>
 
 </body>
+
 </html>
